@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { MiniKitProvider } from "@/providers/MiniKitProvider";
+import { minikitConfig } from "../../minikit.config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,40 +14,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const appUrl = process.env.NEXT_PUBLIC_URL || "https://your-domain.vercel.app";
+const { miniapp } = minikitConfig;
 
 export const metadata: Metadata = {
-  title: "Base Calculator",
-  description: "A simple calculator with history - Base Mini App",
+  title: miniapp.name,
+  description: miniapp.description,
   openGraph: {
-    title: "Base Calculator",
-    description: "A simple calculator with history - Base Mini App",
-    url: appUrl,
-    siteName: "Base Calculator",
+    title: miniapp.ogTitle || miniapp.name,
+    description: miniapp.ogDescription || miniapp.description,
+    url: miniapp.homeUrl,
+    siteName: miniapp.name,
     images: [
       {
-        url: `${appUrl}/og-image.png`,
+        url: miniapp.ogImageUrl,
         width: 1200,
         height: 630,
-        alt: "Base Calculator",
+        alt: miniapp.name,
       },
     ],
     locale: "en_US",
     type: "website",
   },
   other: {
-    'base:app_id': '69847d797a0334031d134518',
     "fc:frame": JSON.stringify({
       version: "next",
-      imageUrl: `${appUrl}/og-image.png`,
+      imageUrl: miniapp.ogImageUrl,
       button: {
-        title: "Open Calculator",
+        title: `Open ${miniapp.name}`,
         action: {
           type: "launch_frame",
-          name: "Base Calculator",
-          url: appUrl,
-          splashImageUrl: `${appUrl}/splash.png`,
-          splashBackgroundColor: "#0052FF",
+          name: miniapp.name,
+          url: miniapp.homeUrl,
+          splashImageUrl: miniapp.splashImageUrl,
+          splashBackgroundColor: miniapp.splashBackgroundColor,
         },
       },
     }),
