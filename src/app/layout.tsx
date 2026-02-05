@@ -38,6 +38,7 @@ export const metadata: Metadata = {
     "fc:frame": JSON.stringify({
       version: "next",
       imageUrl: `${appUrl}/og-image.png`,
+      'base:app_id': '69847d797a0334031d134518',
       button: {
         title: "Open Calculator",
         action: {
